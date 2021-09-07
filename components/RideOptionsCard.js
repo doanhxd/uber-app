@@ -80,17 +80,21 @@ const RideOptionsCard = () => {
               <Text>{travelTimeInformation?.duration.text} Travel Time</Text>
             </View>
             <Text style={tw`text-xl`}>
-              {
-                new Intl.NumberFormat("en-gb", {
-                  style: "currency",
-                })
-              }
+              {new Intl.NumberFormat("en-gb", {
+                style: "currency",
+                currency: "GBP",
+              }).format(
+                (travelTimeInformation?.duration.value *
+                  SURGE_CHARGE_RATE *
+                  multiplier) /
+                  100
+              )}
             </Text>
           </TouchableOpacity>
         )}
       />
 
-      <View>
+      <View style={tw`mt-auto border-t border-gray-200`}>
         <TouchableOpacity
           disabled={!selected}
           style={tw`bg-black py-3 m-3 rounded-full ${
